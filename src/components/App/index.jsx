@@ -4,8 +4,7 @@ import './index.css';
 export default function App() {
   const [title, setTitle] = useState('Начните отсчет!');
   const [count, setCount] = useState(25 * 60);
-  const [buttonStartDisabled, setButtonStartDisabled] = useState(false);
-  const [buttonStopDisabled, setButtonStopDisabled] = useState(true);
+  const [countdownOn, isCountDownOn] = useState(false);
 
   const minutes = Math.floor(count / 60).toString().padStart(2, 0);
   const seconds = (count - minutes * 60).toString().padStart(2, 0);
@@ -14,12 +13,12 @@ export default function App() {
   const handlerButtonReset = () => {
     clearInterval(interval.current);
     setCount(25 * 60);
+    isCountDownOn(false);
     setTitle('Начните отсчет!');
   };
 
   const handlerButtonStart = () => {
-    setButtonStartDisabled(true);
-    setButtonStopDisabled(false);
+    isCountDownOn(true);
     interval.current = setInterval(() => {
       setCount((c = count) => {
         if (c >= 1) return c - 1;
@@ -30,8 +29,7 @@ export default function App() {
   };
 
   const handlerButtonStop = () => {
-    setButtonStartDisabled(false);
-    setButtonStopDisabled(true);
+    isCountDownOn(false);
     clearInterval(interval.current);
     setTitle('Не останавливайтесь!');
   };
@@ -53,22 +51,24 @@ export default function App() {
         </span>
       </div>
       <div className="timer__buttons">
-        <button
-          className="timer__button"
-          type="button"
-          onClick={handlerButtonStart}
-          disabled={buttonStartDisabled}
-        >
-          Start
-        </button>
-        <button
-          className="timer__button"
-          type="button"
-          onClick={handlerButtonStop}
-          disabled={buttonStopDisabled}
-        >
-          Stop
-        </button>
+        {!countdownOn && (
+          <button
+            className="timer__button"
+            type="button"
+            onClick={handlerButtonStart}
+          >
+            Start
+          </button>
+        )}
+        {countdownOn && (
+          <button
+            className="timer__button"
+            type="button"
+            onClick={handlerButtonStop}
+          >
+            Stop
+          </button>
+        )}
         <button
           className="timer__button"
           type="button"
