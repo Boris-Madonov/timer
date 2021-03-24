@@ -1,3 +1,32 @@
-.App {
-  color: blue;
+.timer__page {
+  background-color: rgb(153, 213, 203);
+  width: 100vw;
+  height: 100vh;
+  padding-top: 150px;
+}
+
+.timer__title {
+  margin: 0 auto 100px;
+  text-align: center;
+  font-family: 'Inter';
+  font-size: 30px;
+  line-height: 1.2px;
+  font-weight: normal;
+  color: rgb(102, 176, 185);
+  height: 50px;
+}
+
+.timer__numbers {
+  font-family: 'Inter';
+  font-size: 150px;
+  line-height: 1.2;
+  font-weight: normal;
+  color: rgb(55, 108, 111);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.timer__number {
+
 }
