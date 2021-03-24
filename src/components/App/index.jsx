@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './index.css';
 
 export default function App() {
   const [title, setTitle] = useState('Начните отсчет!');
-  const [count, setCount] = useState(25 * 60);
+  const [count, setCount] = useState(10);
 
   const minutes = Math.floor(count / 60).toString().padStart(2, 0);
   const seconds = (count - minutes * 60).toString().padStart(2, 0);
+  const interval = useRef(null);
 
   const handlerButtonStart = () => {
     setTitle('Поехали!');
-    setInterval(() => {
-      setCount((c = count) => c - 1);
+    interval.current = setInterval(() => {
+      setCount((c = count) => {
+        if (c >= 1) return c - 1;
+        setTitle('Отсчет закончен!');
+        return 0;
+      });
     }, 1000);
+  };
+
+  const handlerButtonStop = () => {
+    setTitle('Начните отсчет!');
+    clearInterval(interval.current);
   };
 
   return (
@@ -42,6 +52,7 @@ export default function App() {
         <button
           className="timer__button"
           type="button"
+          onClick={handlerButtonStop}
         >
           Stop
         </button>
