@@ -2,7 +2,7 @@
 
 React приложение - таймер на 25 минут.
 
-https://boris-madonov.github.io/timer
+**Ссылка на проект** https://boris-madonov.github.io/timer
 
 Приложение создано на основе CRA.
 
